@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "test": "jest",
+    "build": "tsc",
+    "slint": "slint",
+    "start": "node /dist/"
   },
   "keywords": [],
   "author": "",
@@ -19,10 +21,24 @@
   },
   "type": "module",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@jest/globals": "^30.5.1",
     "@types/node": "26.4.1",
-    "typescript": "7.0.2"
+    "@types/pg": "^8.23.1",
+    "drizzle-kit": "1.0.0-rc.4",
+    "eslint": "^10.9.1",
+    "globals": "^17.12.0",
+    "ts-jest": "^29.4.12",
+    "tsx": "^4.23.13",
+    "typescript": "7.0.2",
+    "typescript-eslint": "^8.69.0"
   },
   "dependencies": {
-    "dotenv": "17.4.2"
+    "@types/express": "5.0.6",
+    "dotenv": "17.4.2",
+    "drizzle-orm": "1.0.0-rc.4",
+    "express": "5.2.1",
+    "pg": "^8.23.0",
+    "redis": "6.2.1"
   }
 }
