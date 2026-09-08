@@ -7,7 +7,8 @@
     "test": "jest",
     "build": "tsc",
     "slint": "slint",
-    "start": "node /dist/"
+    "start": "node /dist/",
+    "migrate  ": "pnpm drizzle-kit generate"
   },
   "keywords": [],
   "author": "",
