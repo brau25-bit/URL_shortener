@@ -1,7 +1,7 @@
 
 export type ResponseUrl = {
-    id: number,
+    id: string,
     originalUrl: string,
     shortCode: string,
-    createdAt: Date
+    createdAt: Date | null
 }
