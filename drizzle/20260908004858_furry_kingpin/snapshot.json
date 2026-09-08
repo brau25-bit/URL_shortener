@@ -1,0 +1,79 @@
+{
+  "version": "8",
+  "dialect": "postgres",
+  "id": "59b1ab07-668c-48d3-b5fc-7a372c5318c4",
+  "prevIds": [
+    "3fbc44ad-dba7-426b-8b1a-e2f9dc82677e"
+  ],
+  "ddl": [
+    {
+      "isRlsEnabled": false,
+      "name": "url",
+      "entityType": "tables",
+      "schema": "public"
+    },
+    {
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "name": "id",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "url"
+    },
+    {
+      "type": "varchar(255)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "originalUrl",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "url"
+    },
+    {
+      "type": "varchar(255)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "name": "shortCode",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "url"
+    },
+    {
+      "type": "timestamp",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "name": "createdAt",
+      "entityType": "columns",
+      "schema": "public",
+      "table": "url"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "name": "url_pkey",
+      "schema": "public",
+      "table": "url",
+      "entityType": "pks"
+    }
+  ],
+  "renames": []
+}
