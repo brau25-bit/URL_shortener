@@ -7,6 +7,6 @@ import { CodeGenerator } from "../domain/shortCodeGenerator/codeGenerator.js";
 const repository = new DrizzlerUrlRepository();
 const codeGenerator = new CodeGenerator();
 
-export const urlController = new UrlController(
+export const controller = new UrlController(
     new CreateShortUrl(repository, codeGenerator),
 )
