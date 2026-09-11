@@ -7,8 +7,9 @@
     "test": "jest",
     "build": "tsc",
     "slint": "slint",
-    "start": "node /dist/",
-    "migrate  ": "pnpm drizzle-kit generate"
+    "start": "node ./dist/server.js",
+    "migrate  ": "pnpm drizzle-kit generate",
+    "dev": "tsc && node ./dist/server.js"
   },
   "keywords": [],
   "author": "",
@@ -22,24 +23,28 @@
   },
   "type": "module",
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@jest/globals": "^30.5.1",
+    "@eslint/js": "10.0.1",
+    "@jest/globals": "29.7.0",
+    "@types/jest": "^30.0.0",
     "@types/node": "26.4.1",
-    "@types/pg": "^8.23.1",
+    "@types/pg": "8.23.1",
     "drizzle-kit": "1.0.0-rc.4",
-    "eslint": "^10.9.1",
-    "globals": "^17.12.0",
+    "eslint": "10.9.1",
+    "globals": "17.12.0",
+    "jest": "29.7.0",
     "ts-jest": "^29.4.12",
-    "tsx": "^4.23.13",
-    "typescript": "7.0.2",
-    "typescript-eslint": "^8.69.0"
+    "ts-node": "^10.9.2",
+    "tsx": "4.23.13",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.69.0"
   },
   "dependencies": {
     "@types/express": "5.0.6",
     "dotenv": "17.4.2",
     "drizzle-orm": "1.0.0-rc.4",
     "express": "5.2.1",
-    "pg": "^8.23.0",
+    "nanoid": "6.0.1",
+    "pg": "8.23.0",
     "redis": "6.2.1"
   }
 }
