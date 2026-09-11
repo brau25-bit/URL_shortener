@@ -1,0 +1,30 @@
+name: URL shortener CI workflow 
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setting up packet manager
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - name: Setting up Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Installing dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Building code
+        run: pnpm build
