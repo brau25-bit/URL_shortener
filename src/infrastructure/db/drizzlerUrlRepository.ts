@@ -3,6 +3,7 @@ import { UrlRepository } from "../../domain/urlRepository/urlRepository.js";
 import { db } from "../../index.js";
 import { urlTable } from "./schema.js";
 import { NotFoundError } from "../../presentation/http/url/errors/notFoundError.js";
+import { eq } from "drizzle-orm";
 
 export class DrizzlerUrlRepository implements UrlRepository{
     async create(originalUrl: string, shortCode: string): Promise<ResponseUrl> {
@@ -17,10 +18,15 @@ export class DrizzlerUrlRepository implements UrlRepository{
     }
 
     async findByShortCode(shortCode: string): Promise<ResponseUrl | null> {
-        
+        const [result] = await db
+            .select()
+            .from(urlTable)
+            .where(eq(urlTable.shortCode, shortCode));
+
+        return result ?? null;
     }
 
-    async delete(shortCode: string): Promise<void> {
+    async deleteUrl(shortCode: string): Promise<void> {
         
     }
 }
