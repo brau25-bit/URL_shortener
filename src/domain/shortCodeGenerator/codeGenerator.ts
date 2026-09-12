@@ -1,13 +1,15 @@
 import { ShortCodeGenerator } from "./ShortCodeGenerator.js";
-import {customAlphabet, nanoid} from 'nanoid';
+import {customAlphabet} from 'nanoid';
 
-export class CodeGenerator implements ShortCodeGenerator {
-    generate(): string {
-        return nanoid();
-    }
-}
 
 const nanoId = customAlphabet(
     "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
     7
 );
+
+export class CodeGenerator implements ShortCodeGenerator {
+    generate(): string {
+        return nanoId();
+    }
+}
+
