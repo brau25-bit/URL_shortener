@@ -4,6 +4,7 @@ import {CreateShortUrl} from '../../../src/application/createShortUrl.ts';
 import type { UrlRepository } from '../../../src/domain/urlRepository/urlRepository.ts';
 import { ShortCodeGenerator } from '../../../src/domain/shortCodeGenerator/ShortCodeGenerator.ts';
 import type { ResponseUrl } from '../../../src/domain/response/URL.ts';
+import {RepositoryError} from '../../../src/presentation/http/url/errors/repositoryError.ts'
 
 const generate = jest.fn<() =>  string>();
 
@@ -57,5 +58,30 @@ describe("CreateShortCode.application", () => {
         );
 
         expect(create).toHaveBeenCalledTimes(1);
+
+        expect(generate).toHaveReturnedWith(mockResponse.shortCode)
+    });
+
+    it("Throws error on domain rules", async () => {
+        generate.mockReturnValue("");
+        
+        const createShortUrl = new CreateShortUrl(repository, shortCodeGenerator);
+
+        expect(
+            createShortUrl.execute(mockResponse.originalUrl)
+        ).rejects.toThrowError();
+    });
+
+    it("Repository error", () => {
+        create.mockRejectedValue(
+            new RepositoryError()
+        )
+        generate.mockReturnValue(mockResponse.shortCode)
+
+        const createShortUrl = new CreateShortUrl(repository, shortCodeGenerator);
+
+        expect(
+            createShortUrl.execute(mockResponse.originalUrl)
+        ).rejects.toThrow(RepositoryError);
     })
 })
