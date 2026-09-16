@@ -2,15 +2,25 @@ import { Request, Response, NextFunction } from "express";
 
 import { CreateShortUrl } from "../../../application/createShortUrl.js";
 import { CreateShortUrlCase } from "../../../domain/useCase/url.useCase.js";
+import { RedirectUrlCase } from "../../../domain/useCase/url.redirect.js";
+import { Logger } from "../../../domain/logger/logger.js";
 
 export class UrlController {
     
     constructor(
-        private readonly createShortUrl: CreateShortUrlCase
+        private readonly createShortUrl: CreateShortUrlCase,
+        private readonly redirectUrl: RedirectUrlCase,
+        private readonly logger: Logger
     ){}
 
     async createShortCode(req: Request, res: Response, next: NextFunction): Promise<void>{
         try {
+            this.logger.info("Request received", {
+                method: req.method,
+                path: req.url,
+                body: req.body
+            });
+
             const result = await this.createShortUrl.execute(
                 req.body.originalUrl
             );
@@ -26,7 +36,19 @@ export class UrlController {
 
     async findByShortCode(req: Request, res: Response, next: NextFunction): Promise<void>{
         try {
-            
+            this.logger.info("Request received", {
+                method: req.method,
+                path: req.url,
+                query: req.query
+            });
+
+            const {shortCode} = req.query;
+
+            const result = await this.redirectUrl.execute(
+                shortCode as string
+            )
+
+            res.redirect(301, result.response?.originalUrl!)
         } catch (error) {
             next(error)
         }
