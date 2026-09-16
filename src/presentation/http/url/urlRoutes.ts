@@ -6,6 +6,6 @@ const urlRouter: Router = Router();
 
 urlRouter.post("/", controller.createShortCode);
 
-//urlRouter.get("/:short-code");
+urlRouter.get("/:shortCode", controller.findByShortCode);
 
 export default urlRouter;
