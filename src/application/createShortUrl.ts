@@ -2,13 +2,15 @@ import { UrlRepository } from "../domain/urlRepository/urlRepository.js";
 import { Response } from "../domain/response/response.js";
 import { ShortCodeGenerator } from "../domain/shortCodeGenerator/ShortCodeGenerator.js";
 import { ShortCodeDomain } from "../domain/url/shortCodeDomain.js";
+import { Logger } from "../domain/logger/logger.js";
 
 
 export class CreateShortUrl {
      
     constructor(
         private readonly repository: UrlRepository,
-        private readonly codeGenerator: ShortCodeGenerator 
+        private readonly codeGenerator: ShortCodeGenerator,
+        private readonly logger: Logger
     ){}
 
     async execute(originalUrl: string): Promise<Response>{
@@ -16,6 +18,11 @@ export class CreateShortUrl {
         const shortCode: string =  this.codeGenerator.generate();
 
         new ShortCodeDomain(shortCode);
+
+        this.logger.info("Short code created", {
+            shortCode: shortCode,
+            originalUrl: originalUrl
+        })
 
         const result = await this.repository.create(originalUrl, shortCode);
         
