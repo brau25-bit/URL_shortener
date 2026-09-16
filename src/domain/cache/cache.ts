@@ -1,7 +1,7 @@
-import { ResponseUrl } from "../response/URL.js"
+import { Redis } from "../response/redis.js";
 
 export interface UrlCache {
-    set(shortCode: string): Promise<void>;
+    set(shortCode: string, originalUrl: string): Promise<void>;
 
-    get(shortCode: string): Promise<ResponseUrl | null>;
+    get(shortCode: string): Promise<Redis | null>;
 }
