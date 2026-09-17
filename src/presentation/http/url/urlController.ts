@@ -9,18 +9,11 @@ export class UrlController {
     
     constructor(
         private readonly createShortUrl: CreateShortUrlCase,
-        private readonly redirectUrl: RedirectUrlCase,
-        private readonly logger: Logger
+        private readonly redirectUrl: RedirectUrlCase
     ){}
 
     async createShortCode(req: Request, res: Response, next: NextFunction): Promise<void>{
         try {
-            this.logger.info("Request received", {
-                method: req.method,
-                path: req.url,
-                body: req.body
-            });
-
             const result = await this.createShortUrl.execute(
                 req.body.originalUrl
             );
@@ -36,12 +29,6 @@ export class UrlController {
 
     async findByShortCode(req: Request, res: Response, next: NextFunction): Promise<void>{
         try {
-            this.logger.info("Request received", {
-                method: req.method,
-                path: req.url,
-                query: req.query
-            });
-
             const {shortCode} = req.query;
 
             const result = await this.redirectUrl.execute(
