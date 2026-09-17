@@ -4,6 +4,7 @@ import type { Request, Response as ExpressResponse, NextFunction } from 'express
 import {CreateShortUrlCase} from '../../../src/domain/useCase/url.useCase.ts';
 import { Response } from '../../../src/domain/response/response.ts';
 import {UrlController} from '../../../src/presentation/http/url/urlController.ts';
+import { RedirectUrlCase } from '../../../src/domain/useCase/url.redirect.ts';
 
 const execute = jest.fn<() => Promise<Response>>();
 
@@ -11,7 +12,11 @@ const urlUseCase: CreateShortUrlCase = {
     execute
 }
 
-const controller = new UrlController(urlUseCase);
+const redirectCase: RedirectUrlCase = {
+    execute
+}
+
+const controller = new UrlController(urlUseCase, redirectCase);
 
 const mockResponse = {
     id: "1",
