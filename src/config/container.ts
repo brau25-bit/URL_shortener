@@ -18,6 +18,5 @@ const redisCache = new RedisCache(logger, redis)
 
 export const controller = new UrlController(
     new CreateShortUrl(repository, codeGenerator, logger),
-    new RedirectUrl(repository, redisCache, logger),
-    logger
+    new RedirectUrl(repository, redisCache, logger)
 )
