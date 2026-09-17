@@ -1,11 +1,15 @@
 import { Router } from "express";
 
 import { controller } from "../../../config/container.js";
+import { middlewareLogger } from "../middleware/logger.js";
+import { PinoLogger } from "../../../infrastructure/logger/logger.js";
+
+const logger = new PinoLogger();
 
 const urlRouter: Router = Router();
 
-urlRouter.post("/", controller.createShortCode);
+urlRouter.post("/",  middlewareLogger(logger), controller.createShortCode);
 
-urlRouter.get("/:shortCode", controller.findByShortCode);
+urlRouter.get("/:shortCode", middlewareLogger(logger), controller.findByShortCode);
 
 export default urlRouter;
