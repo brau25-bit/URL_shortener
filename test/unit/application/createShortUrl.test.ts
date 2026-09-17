@@ -4,8 +4,14 @@ import {CreateShortUrl} from '../../../src/application/createShortUrl.ts';
 import type { UrlRepository } from '../../../src/domain/urlRepository/urlRepository.ts';
 import { ShortCodeGenerator } from '../../../src/domain/shortCodeGenerator/ShortCodeGenerator.ts';
 import type { ResponseUrl } from '../../../src/domain/response/URL.ts';
-import {RepositoryError} from '../../../src/presentation/http/url/errors/repositoryError.ts'
+import {RepositoryError} from '../../../src/presentation/http/url/errors/repositoryError.ts';
+import { Logger } from '../../../src/domain/logger/logger.ts';
 
+const logger: Logger = {
+    info(message, meta) {},
+    warn(message, meta) {},
+    error(message, meta) {},
+}
 const generate = jest.fn<() =>  string>();
 
 const shortCodeGenerator: ShortCodeGenerator = {
@@ -42,7 +48,7 @@ describe("CreateShortCode.application", () => {
         generate.mockReturnValue(mockResponse.shortCode);
         create.mockResolvedValue(mockResponse);
 
-        const createShortUrl = new CreateShortUrl(repository, shortCodeGenerator);
+        const createShortUrl = new CreateShortUrl(repository, shortCodeGenerator, logger);
         
         const result = await createShortUrl.execute(mockResponse.originalUrl);
 
@@ -65,7 +71,7 @@ describe("CreateShortCode.application", () => {
     it("Throws error on domain rules", async () => {
         generate.mockReturnValue("");
         
-        const createShortUrl = new CreateShortUrl(repository, shortCodeGenerator);
+        const createShortUrl = new CreateShortUrl(repository, shortCodeGenerator, logger);
 
         expect(
             createShortUrl.execute(mockResponse.originalUrl)
@@ -78,7 +84,7 @@ describe("CreateShortCode.application", () => {
         )
         generate.mockReturnValue(mockResponse.shortCode)
 
-        const createShortUrl = new CreateShortUrl(repository, shortCodeGenerator);
+        const createShortUrl = new CreateShortUrl(repository, shortCodeGenerator, logger);
 
         expect(
             createShortUrl.execute(mockResponse.originalUrl)
