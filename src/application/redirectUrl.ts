@@ -30,7 +30,7 @@ export class RedirectUrl implements RedirectUrlCase{
                 shortCode: shortCode,
                 error
             });
-        } 
+        }
 
         const shortCodeResult = await this.repository.findByShortCode(shortCode);
 
