@@ -8,8 +8,10 @@ const logger = new PinoLogger();
 
 const urlRouter: Router = Router();
 
-urlRouter.post("/",  middlewareLogger(logger), controller.createShortCode);
+urlRouter.post("/",  middlewareLogger(logger), controller.createShortCode.bind(controller));
 
-urlRouter.get("/:shortCode", middlewareLogger(logger), controller.findByShortCode);
+urlRouter.get("/health", controller.healthCheck)
+
+urlRouter.get("/:shortCode", middlewareLogger(logger), controller.findByShortCode.bind(controller));
 
 export default urlRouter;

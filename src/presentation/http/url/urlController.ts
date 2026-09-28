@@ -40,4 +40,15 @@ export class UrlController {
             next(error)
         }
     }
+
+    async healthCheck(req: Request, res: Response, next: NextFunction): Promise<void>{
+        try {
+            res.status(200).json({
+                healthCheck: 'ok'
+            })
+        } catch (error) {
+            //next(error)
+            console.log(error)
+        }
+    }
 }
