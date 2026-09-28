@@ -15,7 +15,7 @@ export function errorHandler(logger: Logger){
             });
         }
 
-        logger.error("Internal Server Error", {error: err});
+        logger.error("Internal Server Error", {err});
         
         res.status(500).json({
             message: "Internal Server Error"
